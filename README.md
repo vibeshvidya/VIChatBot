@@ -1,32 +1,21 @@
-<<<<<<< HEAD
-## Medical Chatbot
+# VIChatBot
 
-# How to Run?
+## How to Run?
 
-### Steps:
+### Clone Repository
 
-1. Clone the Repository
+git clone https://github.com/vibeshvidya/VIChatBot.git
 
-```bash
-git clone https://github.com/vibeshvidya/MedicalChatbot.git
-```
+### Create Virtual Environment
 
-2. Create conda virtual Environment
+conda create -n vichatbot python=3.10 -y
 
-```bash
-conda create -n medibot python=3.10 -y
-```
-```bash
-conda activate medibot
-```
+conda activate vichatbot
 
-3. Install the requirements
+### Install Dependencies
 
-```bash
 pip install -r requirements.txt
-```
 
-=======
-# MedicalChatbot
-RAG Assignment as part of the AI/ML Course Curriculum
->>>>>>> ecfce0f7b781e18fbff8a1d52686a692d16d8276
+### Run Application
+
+python app.py
