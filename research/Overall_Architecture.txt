@@ -1,0 +1,291 @@
+Think of your chatbot as a company where each tool has a different job.
+Overall Architecture
+User
+  │
+  ▼
+Flask UI
+  │
+  ▼
+LangChain
+  │
+  ├── Hugging Face (Embeddings)
+  │
+  ├── Pinecone (Vector Database)
+  │
+  └── Gemini (LLM)
+  │
+  ▼
+Response Back to User
+
+________________________________________
+1. Flask
+What is Flask?
+Flask is a Python web framework.
+Think of Flask as the receptionist of your chatbot.
+When a user types:
+What is a Rs.299 recharge plan?
+Flask:
+•	Receives the question
+•	Sends it to LangChain
+•	Gets the answer
+•	Displays it on the UI
+________________________________________
+In Your Project
+app = Flask(__name__)
+Creates the web application.
+________________________________________
+@app.route("/")
+Shows the chatbot page.
+________________________________________
+@app.route("/get")
+Processes the user's question.
+________________________________________
+Real-Life Analogy
+Customer
+   │
+   ▼
+Receptionist (Flask)
+   │
+   ▼
+AI Team
+
+________________________________________
+
+2. LangChain
+What is LangChain?
+LangChain is an AI orchestration framework.
+Think of LangChain as the Project Manager.
+Without LangChain:
+PDF
+Gemini
+Pinecone
+Embeddings
+
+all separate
+LangChain connects everything.
+________________________________________
+In Your Project
+create_retrieval_chain()
+Connects:
+Retriever
++
+Gemini
+________________________________________
+create_stuff_documents_chain()
+Combines:
+Relevant docs
++
+Question
+before sending to Gemini.
+________________________________________
+Real-Life Analogy
+LangChain = Team Lead
+
+Coordinates:
+• Pinecone
+• Hugging Face
+• Gemini
+
+________________________________________
+3. Hugging Face
+What is Hugging Face?
+Hugging Face is the world's largest repository of AI models.
+Think of it like:
+GitHub for AI Models
+________________________________________
+In Your Project
+HuggingFaceEmbeddings
+uses:
+sentence-transformers/all-MiniLM-L6-v2
+________________________________________
+What does it do?
+Converts text into numbers.
+Example:
+Recharge Plan
+becomes:
+[0.45, 0.22, 0.76 ...]
+These numbers are called:
+Embeddings
+________________________________________
+Why?
+Computers understand:
+Numbers
+better than
+Words
+________________________________________
+Real-Life Analogy
+Imagine translating:
+English
+into
+Computer Language
+That's what embeddings do.
+
+________________________________________
+4. Embeddings
+What are Embeddings?
+Embeddings are mathematical representations of text.
+Example:
+Recharge Plan
+and
+Mobile Plan
+will have similar embeddings.
+________________________________________
+Why Important?
+When user asks:
+Tell me about recharge options
+The chatbot can find:
+Plan Details
+Data Plans
+Recharge Benefits
+even if exact words are different.
+________________________________________
+Real-Life Analogy
+Like remembering:
+Dog
+Puppy
+Pet
+mean almost the same thing.
+
+________________________________________
+5. Pinecone
+What is Pinecone?
+Pinecone is a Vector Database.
+Normal Database:
+Stores text
+Pinecone:
+Stores embeddings
+________________________________________
+In Your Project
+PineconeVectorStore
+stores:
+Document Embeddings
+________________________________________
+What happens?
+When user asks:
+How can I port my number?
+Pinecone searches all stored embeddings.
+________________________________________
+Returns:
+Most relevant chunks
+________________________________________
+Real-Life Analogy
+Think of Pinecone as:
+Smart Library
+Instead of searching exact words:
+Searches meaning
+
+________________________________________
+6. Gemini
+What is Gemini?
+Gemini is Google's Large Language Model (LLM).
+Your code:
+ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash"
+)
+________________________________________
+What does Gemini do?
+Converts retrieved information into a human answer.
+Input:
+Chunk 1
+Chunk 2
+Chunk 3
+
+Question:
+What is porting?
+Output:
+Number portability allows customers
+to switch networks while retaining
+their mobile number.
+________________________________________
+Real-Life Analogy
+Gemini is the teacher.
+It reads reference material and explains it.
+
+________________________________________
+7. RAG (Retrieval Augmented Generation)
+What is RAG?
+Your entire chatbot uses RAG.
+________________________________________
+Without RAG:
+Question
+   ↓
+Gemini
+Gemini only knows what it was trained on.
+________________________________________
+With RAG:
+Question
+   ↓
+Pinecone
+   ↓
+Relevant PDF Content
+   ↓
+Gemini
+   ↓
+Answer
+Much more accurate.
+________________________________________
+Real-Life Analogy
+Before answering,
+Gemini first opens the textbook.
+Then answers.
+
+________________________________________
+8. Document Loaders
+What are they?
+Used to read PDFs.
+Your code:
+DirectoryLoader
+PyPDFLoader
+________________________________________
+Purpose
+PDF
+ ↓
+Readable Text
+________________________________________
+Real-Life Analogy
+A scanner reading pages from a book.
+
+________________________________________
+9. Text Splitter
+What is it?
+Cuts large documents into smaller chunks.
+Your code:
+RecursiveCharacterTextSplitter
+________________________________________
+Why?
+Suppose:
+PDF has 300 pages
+Too large.
+So split into:
+Chunk 1
+Chunk 2
+Chunk 3
+________________________________________
+Real-Life Analogy
+Breaking a big textbook into flashcards.
+
+________________________________________
+10. Prompt Template
+What is it?
+Tells Gemini how to behave.
+Your code:
+ChatPromptTemplate
+________________________________________
+Example:
+"You are a Vi Customer Assistant."
+________________________________________
+Real-Life Analogy
+Instructions given to an employee before customer interaction.
+
+________________________________________
+
+"Explain the technology stack of your ViChatBot"
+
+The chatbot is built using Flask for the web interface, LangChain for orchestration, 
+Hugging Face MiniLM embeddings for converting text into vectors, Pinecone as the vector database 
+to store and retrieve document embeddings, and Google Gemini 2.5 Flash as the Large Language Model 
+for generating responses. The application follows a RAG architecture where user queries are 
+converted into embeddings, relevant document chunks are retrieved from Pinecone, and Gemini 
+generates the final response using the retrieved context. This ensures answers are based on the 
+uploaded knowledge base rather than only the model's pre-trained knowledge.
+

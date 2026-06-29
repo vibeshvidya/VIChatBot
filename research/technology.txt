@@ -1,0 +1,9 @@
+The chatbot is built using Flask for the web interface, 
+LangChain for orchestration, 
+Hugging Face MiniLM embeddings for converting text into vectors, 
+Pinecone as the vector database to store and retrieve document embeddings, and 
+Google Gemini 2.5 Flash as the Large Language Model for generating responses. 
+The application follows a RAG architecture where user queries are converted into embeddings, relevant document chunks are retrieved from Pinecone, and 
+Gemini generates the final response using the retrieved context. 
+This ensures answers are based on the uploaded knowledge base rather than only the 
+model's pre-trained knowledge.
