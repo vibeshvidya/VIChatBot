@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #dff7f4, #eef6ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.chat-card {
+    width: 430px;
+    height: 640px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 90, 100, 0.18);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #00796b, #00a896);
+    color: white;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bot-icon {
+    width: 50px;
+    height: 50px;
+    background: #e60000;   /* Vodafone red */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: Arial, sans-serif;
+}
+
+.chat-header h2 {
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.chat-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8fcfc;
+}
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    background: #e0f2f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    max-width: 75%;
+    padding: 13px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.bot-message .text {
+    background: #e0f7f4;
+    color: #003d36;
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.user-message .text {
+    background: #EE2737;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.typing {
+    display: none;
+    padding: 0 20px 10px;
+    color: #00796b;
+    font-size: 13px;
+    font-style: italic;
+    background: #f8fcfc;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+}
+
+.chat-input-area input {
+    flex: 1;
+    border: 1px solid #cfd8dc;
+    border-radius: 25px;
+    padding: 13px 16px;
+    outline: none;
+    font-size: 14px;
+}
+
+.chat-input-area input:focus {
+    border-color: #00a896;
+}
+
+.chat-input-area button {
+    border: none;
+    background: #00796b;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chat-input-area button:hover {
+    background: #005f54;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 500px) {
+    .chat-card {
+        width: 100%;
+        height: 90vh;
+        border-radius: 18px;
+    }
+}
